@@ -1,10 +1,10 @@
 const User = require("../models/usersModels");
 
 async function createUsers(req, res) {
-  const { userName, email, password } = req.body;
+  const { UserName, email, password } = req.body;
   try {
     const newUser = new User({
-      UserName: userName,
+      UserName: UserName,
       email: email,
       password: password,
     });
