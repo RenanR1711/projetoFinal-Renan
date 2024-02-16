@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const usersRoutes = require("./routes/usersRoutes");
+const postRoutes = require("./routes/postRoutes");
 const dotenv = require("dotenv");
 require("dotenv").config();
 
@@ -21,6 +22,7 @@ connectMongo();
 app.use(express.json());
 
 app.use("/api/v1/users", usersRoutes);
+app.use("/api/v1/post", postRoutes);
 
 app.listen(PORT, () => {
   console.log("MINHA APLICAÇAO EXPRESS");
