@@ -25,19 +25,21 @@ async function readAllUsers(req, res) {
 }
 
 async function updateUsers(req, res) {
-  const { userName, email, password } = req.body;
+  const userBody = req.body;
+  const { UserName, email, password } = req.body;
   try {
-    const mongoPayload = new User({
-      UserName: userName,
+    console.log(req.params.id);
+    const mongoPayload = {
+      UserName: UserName,
       email: email,
       password: password,
-    });
-    const usersUpdated = await User.findByIdAndUpdate(
+    };
+    const userUpdated = await User.findByIdAndUpdate(
       req.params.id,
       mongoPayload,
       { new: true }
     );
-    console.log(usersUpdated);
+    console.log(userUpdated);
     res.send({ message: "usuario atualizado com sucesso!" });
   } catch (error) {
     console.log(error);
