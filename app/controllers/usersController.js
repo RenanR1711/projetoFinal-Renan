@@ -1,12 +1,20 @@
 const User = require("../models/usersModels");
+const bcrypt = require("bcrypt");
 
 async function createUsers(req, res) {
   const { UserName, email, password } = req.body;
+  const API_KEY = req.headers["api_key"];
+  console.log(API_KEY);
+  if (API_KEY !== "minha_chave_secreta") {
+    res.status(401).send({ message: "nao autorizado" });
+    return;
+  }
+  const hasPassword = await bcrypt.hash(password, 10);
   try {
     const newUser = new User({
       UserName: UserName,
       email: email,
-      password: password,
+      password: hasPassword,
     });
     await newUser.save();
     res.status(201).send({ message: "usuario criado com susseço" });
