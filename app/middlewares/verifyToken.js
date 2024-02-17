@@ -17,7 +17,7 @@ function verifyToken(req, res, next) {
       }
     });
   } else {
-    res.status(401).send({ message: "nao autorizado token" });
+    res.status(401).send({ message: "nao autorizado" });
   }
 }
 
